@@ -1,0 +1,29 @@
+// TODO: global variables
+
+podTemplate(
+  inheritFrom: "jenkins-agent" ,
+  containers: [
+    containerTemplate(name: "kubernetes-container", image: "alpine/k8s:1.24.13", alwaysPullImage: false, ttyEnabled: true, command: "cat"),
+  ]
+) {
+  node(POD_LABEL) {
+    stage("CodeCheckout_1") {
+      checkout([$class: "GitSCM", userRemoteConfigs: [[url: "https://github.com/samar-belhadj/leto-gitops.git", credentialsId: "github"]], branches: [[name: "main"]]])
+    }
+    stage("DeployKubernetes_1") {
+      container("docker-container") {
+        withCredentials([file(credentialsId: "", variable: 'KUBECONFIG')]) {
+          echo 'Applying K8s manifests...'
+          sh """
+            cd "k8s"
+      
+            # Deploy all K8S resources
+            kubectl apply -n "samar belhadj" -f "deployment.yaml"
+            kubectl apply -n "samar belhadj" -f "svc.yaml"
+            kubectl apply -n "samar belhadj" -f "ingress.yaml"
+          """
+        }
+      }
+    }
+  }
+}
