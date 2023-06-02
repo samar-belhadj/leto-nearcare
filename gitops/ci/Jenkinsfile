@@ -1,0 +1,41 @@
+// TODO: global variables
+
+podTemplate(
+  inheritFrom: "jenkins-agent" ,
+  containers: [
+    containerTemplate(name: "java-container", image: "maven:3.8.6-openjdk-11-slim", alwaysPullImage: false, ttyEnabled: true, command: "cat"),
+    containerTemplate(name: "docker-container", image: "docker:19.03.1-dind", alwaysPullImage: false, ttyEnabled: true, command: "cat"),
+  ]
+) {
+  node(POD_LABEL) {
+    stage("CodeCheckout_1") {
+      checkout([$class: "GitSCM", userRemoteConfigs: [[url: "https://github.com/samar-belhadj/leto-nearcare.git", credentialsId: "github"]], branches: [[name: "main"]]])
+    }
+    stage("BuildAndTestJava_1") {
+      container("java-container") {
+        sh """
+          cd "config-server"
+          mvn -f "./pom.xml" -s "./settings.xml" clean install
+        """
+      }
+    }
+    stage("DockerBuild_1") {
+      container("docker-container") {
+          
+            sh """
+              docker build -t "config-server:1.0.0" -f "gitops/docker/Dockerfile" "./"
+            """
+          }
+    }
+    stage("DockerPush_1") {
+      container("docker-container") {
+          withCredentials([file(credentialsId: "docker-config", variable: "DOCKER_CONFIG")]) {
+            sh """
+              docker push "samarbelhadj/config-server:1.0.0"
+            """
+          }
+        
+      }
+    }
+  }
+}
