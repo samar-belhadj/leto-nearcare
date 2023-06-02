@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<profiles>
+		<profile>
+			<id>azure</id>
+			<properties>
+				<target.docker.registry.url>talenteoregistry.azurecr.io</target.docker.registry.url>
+				<altSnapshotDeploymentRepository>captiva-os::default::https://pkgs.dev.azure.com/captiva-os/Chambre-106/_packaging/Chambre-106/maven/v1</altSnapshotDeploymentRepository>
+				<altReleaseDeploymentRepository>captiva-os::default::https://pkgs.dev.azure.com/captiva-os/Chambre-106/_packaging/Chambre-106/maven/v1</altReleaseDeploymentRepository>
+				<azure.keyvault.secureUri>https://keyvault-access-tokens.vault.azure.net/</azure.keyvault.secureUri>
+				<azure.keyvault.clientId>80e77547-e27c-45d1-bb1c-4817c75365e2</azure.keyvault.clientId>
+				<azure.keyvault.tenantId>3cf74170-97e2-4f3a-ba67-480a9ec41fb2</azure.keyvault.tenantId>
+				<azure.keyvault.clientKey>JXF7Q~_diLk4wZMpyp5fI5qjKETlIjKOfz_~E</azure.keyvault.clientKey>
+				<azure.storage.clientId>80e77547-e27c-45d1-bb1c-4817c75365e2</azure.storage.clientId>
+				<azure.storage.clientSecret>CmI8Q~PgkEM5rIVcHGK6mi1C_JTJPdiZ~-Ki~aQg</azure.storage.clientSecret>
+				<azure.storage.endpoint>https://captivaostalenteo.blob.core.windows.net/images</azure.storage.endpoint>
+			</properties>
+			<repositories>
+				<repository>
+					<id>Chambre-106</id>
+					<url>https://pkgs.dev.azure.com/captiva-os/Chambre-106/_packaging/Chambre-106/maven/v1</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>Chambre-106</id>
+					<url>https://pkgs.dev.azure.com/captiva-os/Chambre-106/_packaging/Chambre-106/maven/v1</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+	
+	<activeProfiles>
+		<activeProfile>azure</activeProfile>
+	</activeProfiles>
+	<servers>
+	        <server>
+                       <id>Chambre-106</id>
+                       <username>captiva-os</username>
+                       <password>vqqydlx5bjnz5k2mazg42oqbjtmacdpwmm7uo5dzqfc3d5qqsbfq</password>
+                </server>
+		<server>
+			<id>talenteoregistry.azurecr.io</id>
+			<username>talenteoregistry</username>
+			<password>4HYV76acSNfRyILGbC2w433i3Ba+cZ0k</password>
+		</server>
+		<server>
+			<id>talenteoregistry</id>
+			<username>talenteoregistry</username>
+			<password>hR624WqHaGduTv2f+i7KlEPN3ASRJYvp</password>
+		</server>
+		
+	</servers>
+</settings>
