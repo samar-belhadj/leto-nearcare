@@ -1,0 +1,16 @@
+#Server port
+server:
+  port: 2001
+
+#Git repo location.
+spring:
+  profiles:
+    active: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitlab.com/chambre-106/config-repo.git
+          username: config-repo
+          password: doLsN5NoE8Dntbsgf3WX
+          clone-on-start: true
