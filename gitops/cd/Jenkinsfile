@@ -20,7 +20,6 @@ podTemplate(
             # Deploy all K8S resources
             kubectl apply -n "samar belhadj" -f "deployment.yaml"
             kubectl apply -n "samar belhadj" -f "svc.yaml"
-            kubectl apply -n "samar belhadj" -f "ingress.yaml"
           """
         }
       }
