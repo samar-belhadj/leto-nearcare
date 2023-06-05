@@ -5,7 +5,7 @@ podTemplate(
   containers: [
     containerTemplate(name: "java-container", image: "maven:3.8.6-openjdk-11-slim", alwaysPullImage: false, ttyEnabled: true, command: "cat"),
     containerTemplate(name: "docker-container", image: "docker:19.03.1-dind", alwaysPullImage: false, ttyEnabled: true, command: "cat"),
-    containerTemplate(name: "jnlp", image: "jenkins/inbound-agent:latest", alwaysPullImage: false, ttyEnabled: true, command: ""),
+    containerTemplate(name: "jnlp", image: "jenkins/jnlp-agent:4.10-1", alwaysPullImage: false, ttyEnabled: true, command: ""),
   ]
 ) {
   node(POD_LABEL) {
