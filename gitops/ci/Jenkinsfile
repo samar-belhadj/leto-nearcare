@@ -24,7 +24,7 @@ podTemplate(
 
         dir('config-server'){  
             sh """
-              docker build -t "config-server:1.0.0" -f "gitops/docker/Dockerfile" "./"
+              docker build -t "config-server:1.0.0" -f "../gitops/docker/Dockerfile" "./"
             """
 
         }
