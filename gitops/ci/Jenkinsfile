@@ -24,7 +24,7 @@ podTemplate(
 
         dir('config-server'){  
             sh """
-              docker build -t "config-server:1.0.0" -f "../gitops/docker/Dockerfile" "./"
+              docker build -t "talenteoregistry.azurecr.io/config-server:1.0.0" -f "../gitops/docker/Dockerfile" "./"
             """
 
         }
@@ -32,9 +32,9 @@ podTemplate(
     }
     stage("DockerPush_1") {
       container("docker-daemon") {
-          withCredentials([file(credentialsId: "docker-config", variable: "DOCKER_CONFIG")]) {
+          withDockerRegistry(credentialsId: 'talenteoregistry', url: 'https://talenteoregistry.azurecr.io') {
             sh """
-              docker push "samarbelhadj/config-server:1.0.0"
+              docker push "talenteoregistry.azurecr.io/config-server:1.0.0"
             """
           }
         
