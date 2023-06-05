@@ -14,18 +14,23 @@ podTemplate(
     }
     stage("BuildAndTestJava_1") {
       container("java-container") {
+        dir('src'){
         sh """
           cd "config-server"
           mvn -f "./pom.xml" -s "./settings.xml" clean install
         """
+        }
       }
     }
     stage("DockerBuild_1") {
       container("docker-container") {
-          
+
+        dir('src'){  
             sh """
               docker build -t "config-server:1.0.0" -f "gitops/docker/Dockerfile" "./"
             """
+
+        }
           }
     }
     stage("DockerPush_1") {
