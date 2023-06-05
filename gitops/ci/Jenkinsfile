@@ -12,7 +12,7 @@ podTemplate(
     }
     stage("BuildAndTestJava_1") {
       container("java-container") {
-        dir('src'){
+        dir('leto-nearcare'){
         sh """
           cd "config-server"
           mvn -f "./pom.xml" -s "./settings.xml" clean install
@@ -23,7 +23,7 @@ podTemplate(
     stage("DockerBuild_1") {
       container("docker-daemon") {
 
-        dir('src'){  
+        dir('leto-nearcare'){  
             sh """
               docker build -t "config-server:1.0.0" -f "gitops/docker/Dockerfile" "./"
             """
