@@ -11,7 +11,7 @@ podTemplate(
       checkout([$class: "GitSCM", userRemoteConfigs: [[url: "https://github.com/samar-belhadj/leto-gitops.git", credentialsId: "github"]], branches: [[name: "main"]]])
     }
     stage("DeployKubernetes_1") {
-      container("docker-container") {
+      container("kubernetes-container") {
         withCredentials([file(credentialsId: "k8s-config", variable: 'KUBECONFIG')]) {
           echo 'Applying K8s manifests...'
           sh """
