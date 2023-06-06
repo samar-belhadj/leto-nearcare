@@ -20,4 +20,4 @@ spec:
           ports:
             - containerPort: 2001
       imagePullSecrets:
-        - name: acr-credentials
+        - name: acrtalenteo-credentials
