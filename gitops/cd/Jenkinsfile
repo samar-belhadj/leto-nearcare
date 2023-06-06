@@ -15,7 +15,7 @@ podTemplate(
         withCredentials([file(credentialsId: "", variable: 'KUBECONFIG')]) {
           echo 'Applying K8s manifests...'
           sh """
-            cd "k8s"
+            cd "kubernetes"
       
             # Deploy all K8S resources
             kubectl apply -n "samar belhadj" -f "deployment.yaml"

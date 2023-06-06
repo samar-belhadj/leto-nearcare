@@ -5,7 +5,7 @@ metadata:
   labels:
     app: config-server
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: config-server
@@ -15,7 +15,9 @@ spec:
         app: config-server
     spec:
       containers:
-      - name: config-server
-        image: samarbelhadj/config-server:1.0.0
-        ports:
-        - containerPort: 2001
+        - name: config-server
+          image: talenteoregistry.azurecr.io/config-server:1.0.0
+          ports:
+            - containerPort: 2001
+      imagePullSecrets:
+        - name: acr-credentials
