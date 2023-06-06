@@ -12,7 +12,7 @@ podTemplate(
     }
     stage("DeployKubernetes_1") {
       container("docker-container") {
-        withCredentials([file(credentialsId: "", variable: 'KUBECONFIG')]) {
+        withCredentials([file(credentialsId: "k8s-config", variable: 'KUBECONFIG')]) {
           echo 'Applying K8s manifests...'
           sh """
             cd "kubernetes"
